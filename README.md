@@ -46,13 +46,9 @@ npm install
 
 **6. Jalankan aplikasi**
 
-Buka dua terminal:
 ```bash
 # Terminal 1
 php artisan serve
-
-# Terminal 2
-npm run dev
 ```
 
 Akses di browser: `http://localhost:8000`
@@ -66,6 +62,161 @@ Akses di browser: `http://localhost:8000`
 | `nim`     | string  | Nomor Induk Mahasiswa (unik) |
 | `jurusan` | string  | Program studi           |
 
+## Dokumentasi API
+
+Base URL: `http://localhost:8000/api`
+
+Semua request harus menyertakan header berikut:
+
+| Header | Value |
+|--------|-------|
+| `Accept` | `application/json` |
+| `Content-Type` | `application/json` |
+
+---
+
+### GET /mahasiswa
+Mengambil seluruh data mahasiswa.
+
+- **Method:** `GET`
+- **URL:** `/api/mahasiswa`
+- **Body:** tidak diperlukan
+
+**Response sukses (200):**
+```json
+[
+  {
+    "id": 1,
+    "nama": "Budi Santoso",
+    "nim": "12345678",
+    "jurusan": "Informatika"
+  }
+]
+```
+
+---
+
+### POST /mahasiswa
+Menambahkan data mahasiswa baru.
+
+- **Method:** `POST`
+- **URL:** `/api/mahasiswa`
+
+**Request body:**
+```json
+{
+  "nama": "Budi Santoso",
+  "nim": "12345678",
+  "jurusan": "Informatika"
+}
+```
+
+| Field | Tipe | Validasi |
+|-------|------|----------|
+| `nama` | string | required, max 255 |
+| `nim` | string | required, max 20, unik |
+| `jurusan` | string | required, max 100 |
+
+**Response sukses (201):**
+```json
+{
+  "id": 1,
+  "nama": "Budi Santoso",
+  "nim": "12345678",
+  "jurusan": "Informatika"
+}
+```
+
+---
+
+### GET /mahasiswa/{id}
+Mengambil detail satu mahasiswa berdasarkan ID.
+
+- **Method:** `GET`
+- **URL:** `/api/mahasiswa/{id}`
+- **Body:** tidak diperlukan
+
+**Response sukses (200):**
+```json
+{
+  "id": 1,
+  "nama": "Budi Santoso",
+  "nim": "12345678",
+  "jurusan": "Informatika"
+}
+```
+
+**Response gagal (404):**
+```json
+{
+  "message": "Data tidak ditemukan."
+}
+```
+
+---
+
+### PUT /mahasiswa/{id}
+Memperbarui data mahasiswa berdasarkan ID.
+
+- **Method:** `PUT`
+- **URL:** `/api/mahasiswa/{id}`
+
+**Request body:**
+```json
+{
+  "nama": "Budi Santoso",
+  "nim": "12345678",
+  "jurusan": "Sistem Informasi"
+}
+```
+
+| Field | Tipe | Validasi |
+|-------|------|----------|
+| `nama` | string | required, max 255 |
+| `nim` | string | required, max 20, unik (kecuali milik sendiri) |
+| `jurusan` | string | required, max 100 |
+
+**Response sukses (200):**
+```json
+{
+  "id": 1,
+  "nama": "Budi Santoso",
+  "nim": "12345678",
+  "jurusan": "Sistem Informasi"
+}
+```
+
+**Response gagal (404):**
+```json
+{
+  "message": "Data tidak ditemukan."
+}
+```
+
+---
+
+### DELETE /mahasiswa/{id}
+Menghapus data mahasiswa berdasarkan ID.
+
+- **Method:** `DELETE`
+- **URL:** `/api/mahasiswa/{id}`
+- **Body:** tidak diperlukan
+
+**Response sukses (200):**
+```json
+{
+  "message": "Data mahasiswa berhasil dihapus."
+}
+```
+
+**Response gagal (404):**
+```json
+{
+  "message": "Data tidak ditemukan."
+}
+```
+
+---
 ## Catatan
 
 - Database menggunakan SQLite — file tersimpan di `database/database.sqlite`
