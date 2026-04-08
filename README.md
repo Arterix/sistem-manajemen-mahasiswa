@@ -129,32 +129,6 @@ Menambahkan data mahasiswa baru.
 
 ---
 
-### GET /mahasiswa/{id}
-Mengambil detail satu mahasiswa berdasarkan ID.
-
-- **Method:** `GET`
-- **URL:** `/api/mahasiswa/{id}`
-- **Body:** tidak diperlukan
-
-**Response sukses (200):**
-```json
-{
-  "id": 1,
-  "nama": "Budi Santoso",
-  "nim": "12345678",
-  "jurusan": "Informatika"
-}
-```
-
-**Response gagal (404):**
-```json
-{
-  "message": "Data tidak ditemukan."
-}
-```
-
----
-
 ### PUT /mahasiswa/{id}
 Memperbarui data mahasiswa berdasarkan ID.
 
